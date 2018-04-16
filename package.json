@@ -1,0 +1,23 @@
+{
+  "name": "e2e-testing-hive",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kautuk-desai/e2e-testing-hive.git"
+  },
+  "author": "kautukdesai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kautuk-desai/e2e-testing-hive/issues"
+  },
+  "homepage": "https://github.com/kautuk-desai/e2e-testing-hive#readme",
+  "dependencies": {
+    "chromedriver": "^2.37.0",
+    "selenium-webdriver": "^4.0.0-alpha.1"
+  }
+}
