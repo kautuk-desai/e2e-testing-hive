@@ -13,5 +13,8 @@
     "chromedriver": "^2.37.0",
     "mocha": "^5.1.0",
     "selenium-webdriver": "^4.0.0-alpha.1"
+  },
+  "devDependencies": {
+    "mochawesome": "^3.0.2"
   }
 }

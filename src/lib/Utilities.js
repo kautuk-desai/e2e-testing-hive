@@ -38,6 +38,7 @@ async function locateElement(driver, locator) {
 async function waitUntilVisible(driver, element) {
 	try {
 		console.log("waiting for element to become visible...");
+		driver.sleep(500); // this allows the next page to load properly.
 		return await driver.wait(until.elementIsVisible(element), config.timeout);
 	} catch (error) {
 		throw new Error("element still not visible: " + error.message.toString());
@@ -48,6 +49,7 @@ Utilities.prototype.clickElement = async function (locator) {
 	var _self = this;
 	try {
 		const element = await locateElement(_self.driver, locator);
+		
 		return await element.click();
 	} catch (error) {
 		throw error;

@@ -1,0 +1,4 @@
+--ui tdd
+--timeout 999999
+--reporter mochawesome
+--reporter-options autoOpen=true
