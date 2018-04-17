@@ -6,33 +6,32 @@ var {
 
 function Utilities() {
 	this.driver = new DriverBuilder().chrome_driver;
-	this.close = async function(){
-		return await this.driver.quit();
-	}
 }
 
 async function loadPage(driver) {
-	console.log("loading hive page...");
-	await driver.get(config.hive_url);
+	try {
+		await driver.get(config.hive_url);
+	} catch (error) {
+		throw new Error("unable to load: " + error.message.toString());
+	}
+
 }
 
 Utilities.prototype.loadHomePage = async function () {
 	try {
 		return await loadPage(this.driver);
 	} catch (error) {
-		console.log("unable to load page...");
+		throw error;
 	}
 }
 
 async function locateElement(driver, locator) {
 	try {
-		// const element = await driver.findElement(locator);
-		console.log("inside asynsc")
 		const element = await driver.wait(until.elementLocated(locator), config.timeout);
 		await waitUntilVisible(driver, element);
 		return element;
 	} catch (error) {
-		console.log(error)
+		throw error;
 	}
 }
 
@@ -49,17 +48,16 @@ Utilities.prototype.clickElement = async function (locator) {
 	var _self = this;
 	try {
 		const element = await locateElement(_self.driver, locator);
-		console.log("element found...");
 		return await element.click();
 	} catch (error) {
-		console.log(error)
+		throw error;
 	}
 }
 
 
 async function setInputText(element, text) {
 	try {
-		console.log("inserting text in the input field...");
+		await element.clear();
 		return await element.sendKeys(text);
 	} catch (error) {
 		throw new Error("unable to insert text in input field: " + error.message.toString());
@@ -70,11 +68,10 @@ Utilities.prototype.insertText = async function (locator, text) {
 	var _self = this;
 	try {
 		const element = await locateElement(_self.driver, locator);
-		// const elementvisible = await waitUntilVisible(_self.driver, element);
 		_self.driver.sleep(250);
 		return await setInputText(element, text);
 	} catch (error) {
-		console.log(error);
+		throw error;
 	}
 }
 
@@ -92,7 +89,17 @@ Utilities.prototype.getText = async function (locator) {
 	try {
 		return await getElementText(_self.driver, locator);
 	} catch (error) {
-		console.log(error);
+		throw new Error(error.message.toString());
+	}
+}
+
+Utilities.prototype.getAttributeValue = async function (locator, attr) {
+	var _self = this;
+	try {
+		const element = await locateElement(_self.driver, locator);
+		return await element.getAttribute(attr);
+	} catch (error) {
+		throw new Error(error.message.toString());
 	}
 }
 
