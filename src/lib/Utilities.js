@@ -6,17 +6,19 @@ var {
 
 function Utilities() {
 	this.driver = new DriverBuilder().chrome_driver;
+	this.close = async function(){
+		return await this.driver.quit();
+	}
 }
 
-async function loadHomePage(driver) {
+async function loadPage(driver) {
 	console.log("loading hive page...");
 	await driver.get(config.hive_url);
 }
 
-Utilities.prototype.loadPage = async function () {
+Utilities.prototype.loadHomePage = async function () {
 	try {
-		await loadHomePage(this.driver);
-		console.log("hive signin page loaded...");
+		return await loadPage(this.driver);
 	} catch (error) {
 		console.log("unable to load page...");
 	}
@@ -48,7 +50,7 @@ Utilities.prototype.clickElement = async function (locator) {
 	try {
 		const element = await locateElement(_self.driver, locator);
 		console.log("element found...");
-		await element.click();
+		return await element.click();
 	} catch (error) {
 		console.log(error)
 	}
@@ -85,11 +87,11 @@ async function getElementText(driver, locator) {
 	}
 }
 
-Utilities.prototype.getText = async function(locator){
+Utilities.prototype.getText = async function (locator) {
 	var _self = this;
-	try{
+	try {
 		return await getElementText(_self.driver, locator);
-	} catch (error){
+	} catch (error) {
 		console.log(error);
 	}
 }
