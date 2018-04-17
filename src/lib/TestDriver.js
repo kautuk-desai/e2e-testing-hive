@@ -112,6 +112,31 @@ TestDriver.prototype.fillIncorrectEmail = async function () {
     }
 }
 
+TestDriver.prototype.fillIncorrectPassword = async function(){
+    var _self = this;
+    try{
+        await fillUserInfo(_self.utility, _self);
+        await _self.utility.insertText(_self.input_password_selector, _self.config.incorrect_password);
+        var attr_value = await _self.utility.getAttributeValue(_self.input_password_selector, "class");
+        return attr_value;
+    } catch(error){
+        console.log(error);
+    }
+}
+
+TestDriver.prototype.formSubmissionWithoutUserInfo = async function(){
+    var _self = this;
+    try{
+
+        await _self.utility.insertText(_self.input_email_selector, _self.config.email);
+        await _self.utility.insertText(_self.input_password_selector, _self.config.password);
+        var attr_value = await _self.utility.getAttributeValue(_self.submit_form_selector, "class");
+        return attr_value;
+    } catch(error){
+        console.log(error);
+    }
+}
+
 TestDriver.prototype.loadWorspaceInfoCard = async function () {
     var _self = this;
     try {

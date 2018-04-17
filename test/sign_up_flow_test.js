@@ -26,9 +26,19 @@ describe("Sign up workflow tests", function () {
         assert.strictEqual(onboarding_header, "Tell us about yourself", "onboarding header text does not match");
     });
 
+    it("checks form submission without user info (first name, last name, phone)", async function(){
+        var is_submit_form_disabled = await test_driver.formSubmissionWithoutUserInfo();
+        assert.strictEqual(is_submit_form_disabled, "hv btn btn-primary ladda-button disabled", "able to create workspace without user info");
+    });
+
     it("checks form submission with incorrect email", async function () {
         var attr_value = await test_driver.fillIncorrectEmail();
         assert.strictEqual(attr_value, "input__field not-empty", "email field error did not occur");
+    });
+
+    it("checks password length", async function(){
+        var password_field_class = await test_driver.fillIncorrectPassword();
+        assert.strictEqual(password_field_class, "input__field not-empty", "password < 6, yet error did not occur");
     });
 
     it("loads create a workspace card", async function () {

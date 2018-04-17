@@ -8,6 +8,7 @@ config.incorrect_email = "test";
 config.organization_name = "test2" + new Date().getTime().toString();
 config.email = "test@" + config.organization_name + ".com";
 config.password = "password123";
+config.incorrect_password = "pass";
 config.coworker = "coworker1@" + config.organization_name + ".com";
 
 module.exports = config;
