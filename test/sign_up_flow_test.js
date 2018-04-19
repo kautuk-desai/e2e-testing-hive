@@ -31,6 +31,11 @@ describe("Sign up workflow tests", function () {
         assert.strictEqual(is_submit_form_disabled, "hv btn btn-primary ladda-button disabled", "able to create workspace without user info");
     });
 
+    it("checks for phone number validation", async function(){
+        var phone_number_validation = await test_driver.checkForPhoneNumValidation();
+        assert.strictEqual(phone_number_validation, "input error", "phone validation failed: characters allowed in phone num input field.");
+    });
+
     it("checks form submission with incorrect email", async function () {
         var attr_value = await test_driver.fillIncorrectEmail();
         assert.strictEqual(attr_value, "input__field not-empty", "email field error did not occur");

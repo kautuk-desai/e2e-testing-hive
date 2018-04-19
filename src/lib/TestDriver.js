@@ -15,6 +15,8 @@ TestDriver.prototype.loadSelectors = function () {
     this.first_name_selector = By.css("#firstName");
     this.last_name_selector = By.css("#lastName");
     this.input_phone_selector = By.css("#phone");
+    this.input_phone_div_selector = By.css("#joinForm > div.row > div > div:nth-child(8) > div");
+
     this.input_email_selector = By.css("#email");
     this.input_password_selector = By.css("#password");
     this.submit_form_selector = By.css("#joinForm > div.card-buttons > button");
@@ -131,6 +133,17 @@ TestDriver.prototype.formSubmissionWithoutUserInfo = async function(){
         await _self.utility.insertText(_self.input_email_selector, _self.config.email);
         await _self.utility.insertText(_self.input_password_selector, _self.config.password);
         var attr_value = await _self.utility.getAttributeValue(_self.submit_form_selector, "class");
+        return attr_value;
+    } catch(error){
+        console.log(error);
+    }
+}
+
+TestDriver.prototype.checkForPhoneNumValidation = async function(){
+    var _self = this;
+    try{
+        await _self.utility.insertText(_self.input_phone_selector, _self.config.incorrect_phone);
+        var attr_value = await _self.utility.getAttributeValue(_self.input_phone_div_selector, "class");
         return attr_value;
     } catch(error){
         console.log(error);
