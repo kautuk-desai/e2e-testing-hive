@@ -6,4 +6,4 @@ steps to get it working:
 3. npm install
 4. mocha test
 
-There are 12 tests and once the tests are completed a HTML report will be generated with error and successfully tests.
+There are 13 tests and once the tests are completed a HTML report will be generated with error and successfully tests.
